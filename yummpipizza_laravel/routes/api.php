@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/pizza','PizzaController@index')->name('pizza.index');
+
+Route::post('/order','OrderController@store')->name('order.store');

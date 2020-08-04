@@ -10,6 +10,6 @@ class PizzaController extends Controller
     {
 
         return \App\Pizza::all();
-        //make db query and send data back to client
+       
     }
 }
