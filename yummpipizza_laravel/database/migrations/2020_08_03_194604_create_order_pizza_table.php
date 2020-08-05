@@ -17,6 +17,7 @@ class CreateOrderPizzaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('pizza_id');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
         });
     }

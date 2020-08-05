@@ -10,6 +10,6 @@ class Order extends Model
     protected $guarder = [];
     public function pizzas()
     {
-        return $this->belongsToMany(Pizza::class);
+        return $this->belongsToMany(Pizza::class)->withTimestamps()->withPivot(['quantity']);
     }
 }

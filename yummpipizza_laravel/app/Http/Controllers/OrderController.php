@@ -10,11 +10,14 @@ class OrderController extends Controller
 
     public function store()
     {
+        //pass in the request array of pizza id's and quantities
         $data = request()->validate([
             'name' => ['required', 'string'],
             'address' => ['required','string'],
             'phone' => ['required','integer'],
-            'bill' => ['required']
+            'bill' => ['required'],
+            'pizzaIds' => ['required'],
+            'pizzaQuantities' => ['required']
         ]);
 
         $order = new \App\Order();
@@ -23,6 +26,24 @@ class OrderController extends Controller
         $order->client_phone = $data['phone'];
         $order->bill = $data['bill'];
         $order->save();
+
+        $pizza = new \App\Pizza();
+        $pizzas = $pizza->find($data['pizzaIds']);
+
+        foreach($pizzas as $pizza)
+        {
+            $order->pizzas()->attach($pizza);
+        }
+
+        foreach($data['pizzaQuantities'] as $quantity)
+        {
+            $order->pivot->quantity = $quantity;
+
+        }
+
+        
+
+        
 
         // \App\Order::create([
         //     'client_name' => $data['name'],
