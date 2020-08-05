@@ -10,7 +10,7 @@ class OrderController extends Controller
 
     public function store()
     {
-        $data = requset()->validate([
+        $data = request()->validate([
             'name' => ['required', 'string'],
             'address' => ['required','string'],
             'phone' => ['required','integer'],
