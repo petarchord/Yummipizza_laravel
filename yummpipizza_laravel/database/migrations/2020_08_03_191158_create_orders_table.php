@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('client_name');
             $table->string('client_address');
-            $table->integer('client_phone');
+            $table->char('client_phone',20);
             $table->float('bill');
             $table->timestamps();
         });

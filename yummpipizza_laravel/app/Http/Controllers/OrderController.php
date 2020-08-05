@@ -14,7 +14,7 @@ class OrderController extends Controller
         $data = request()->validate([
             'name' => ['required', 'string'],
             'address' => ['required','string'],
-            'phone' => ['required','integer'],
+            'phone' => ['required','string'],
             'bill' => ['required'],
             'pizzaIds' => ['required'],
             'pizzaQuantities' => ['required']
@@ -35,15 +35,6 @@ class OrderController extends Controller
             $order->pizzas()->attach($pizza);
         }
 
-        foreach($data['pizzaQuantities'] as $quantity)
-        {
-            $order->pivot->quantity = $quantity;
-
-        }
-
-        
-
-        
 
         // \App\Order::create([
         //     'client_name' => $data['name'],
