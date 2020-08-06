@@ -16,8 +16,7 @@ class OrderController extends Controller
             'address' => ['required','string'],
             'phone' => ['required','string'],
             'bill' => ['required'],
-            'pizzaIds' => ['required'],
-            'pizzaQuantities' => ['required']
+            'orders' => ['required']
         ]);
 
         $order = new \App\Order();
@@ -27,24 +26,15 @@ class OrderController extends Controller
         $order->bill = $data['bill'];
         $order->save();
 
+        $orders = $data['orders'];
         $pizza = new \App\Pizza();
-        $pizzas = $pizza->find($data['pizzaIds']);
-
-        foreach($pizzas as $pizza)
+        foreach($orders as $orderItem)
         {
-            $order->pizzas()->attach($pizza);
+            $pizzaItem = $pizza->find($orderItem['id']);
+            $order->pizzas()->attach($pizzaItem,['quantity' => $orderItem['quantity']]);
         }
 
-
-        // \App\Order::create([
-        //     'client_name' => $data['name'],
-        //     'client_address' => $data['address'],
-        //     'client_phone' => $data['phone'],
-        //     'bill' => $data['bill']
-
-        // ]);
-
-       // return request()->all();
+      
 
 
 
